@@ -2,48 +2,43 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
-const Voice = () => {
-  const {
-    transcript,
-    listening,
-    resetTranscript,
-    browserSupportsSpeechRecognition,
-  }: any = useSpeechRecognition();
+const SpeechRecognitionComponent: React.FC = () => {
+  const { transcript, listening, resetTranscript } = useSpeechRecognition();
 
-  if (!browserSupportsSpeechRecognition) {
-    return <span>Browser doesn't support speech recognition.</span>;
-  }
+  const startListening = () => {
+    SpeechRecognition.startListening({ continuous: true });
+  };
+
+  const stopListening = () => {
+    SpeechRecognition.stopListening();
+  };
 
   return (
     <div className="w-full h-[100vh] flex items-center justify-center">
-      <div className="w-[500px] min-h-[600px] flex items-center flex-col border rounded-[30px] justify-center gap-[30px]">
-        <p className="font-bold text-[20px] ">
-          Microphone: {listening ? "on" : "off"}
-        </p>
-        <div className="flex flex-row gap-4">
-          <button
-            className="p-3 bg-blue-900 font-bold text-[15px] w-[100px] text-white"
-            onClick={SpeechRecognition.startListening}
-          >
-            Start
-          </button>
-          <button
-            className="p-3 bg-blue-900  font-bold text-[15px] w-[100px] text-white"
-            onClick={SpeechRecognition.stopListening}
-          >
-            Stop
-          </button>
-        </div>
+      <div className="w-[40%] h-[30%] bg-gray-200">
+        <div className="font-bold text-[20px]"> {listening ? "on" : "of"}</div>
         <button
-          className="p-3 bg-blue-900 font-bold text-[15px] w-[100px] text-white"
-          onClick={resetTranscript}
+          onClick={startListening}
+          className="w-[200px] h-[40px] bg-blue-400"
         >
-          Reset
+          Start Listening
         </button>
-
-        <p className="font-bold text-[40px] text-black">{transcript} </p>
+        <button
+          onClick={stopListening}
+          className="w-[200px] h-[40px] bg-blue-400"
+        >
+          Stop Listening
+        </button>
+        <button
+          onClick={resetTranscript}
+          className="w-[200px] h-[40px] bg-blue-400"
+        >
+          Reset Transcript
+        </button>
+        <p className="fonr-bold text-[40px]">Transcript: {transcript}</p>
       </div>
     </div>
   );
 };
-export default Voice;
+
+export default SpeechRecognitionComponent;

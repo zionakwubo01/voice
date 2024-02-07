@@ -13,7 +13,6 @@
 // export const {} = Reduxstate.actions
 
 // export default Reduxstate.reducer
-import React from "react";
 
 const Reduxstate = () => {
   return <div>Reduxstate</div>;

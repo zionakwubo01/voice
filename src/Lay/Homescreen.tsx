@@ -1,5 +1,3 @@
-import CreateQuestion from "../components/auth/CreateQuestion";
-
 document.title = "Home screen";
 
 const Homescreen = () => {
